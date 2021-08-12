@@ -24,6 +24,7 @@ const routes: Array<RouteConfig> = [
     component:Statistics
   }
 
+
 ];
 
 const router = new VueRouter({
