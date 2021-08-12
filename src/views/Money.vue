@@ -1,56 +1,7 @@
 <template>
   <div class="nav-wrapper">
     <div class="content">
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
-    <p>money</p>
+      <p>Money</p>
     </div>
     <Nav/>
   </div>
@@ -64,15 +15,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .nav-wrapper {
-    border: 1px solid green;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  .content{
-    border: 1px solid blue;
-    overflow: auto;
-    flex-grow: 1;
-  }
+.nav-wrapper {
+  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  border: 1px solid blue;
+  overflow: auto;
+  flex-grow: 1;
+}
 </style>
