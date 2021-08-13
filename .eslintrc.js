@@ -11,9 +11,10 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020
   },
-  rules: {
+  "rules": {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    '@typescript-eslint/no-var-requires': 0,
   },
   overrides: [
     {
@@ -25,5 +26,9 @@ module.exports = {
         jest: true
       }
     }
-  ]
+  ],
+  "globals":{
+    "__WebpackModuleApi":"writable"
+  }
+//  使用global让数据全局可以改变
 }
