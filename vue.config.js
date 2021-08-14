@@ -1,4 +1,4 @@
-// /* eslint-disable */
+/* eslint-disable */
 const path = require('path')
 // import path from  'path';
 
