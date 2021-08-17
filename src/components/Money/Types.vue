@@ -10,13 +10,13 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Types extends Vue {
   type = '-';
+  // @Prop(Number) xxx: number | undefined;
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   selectType(type: string) {
     if (type !== '-' && type !== '+') {
       throw new Error('type is unknown');
@@ -25,27 +25,6 @@ export default class Types extends Vue {
   }
 }
 
-// export default {
-
-// name: 'Types',
-// props: ['xxx'],
-// data() {
-//   return {
-//     type: '-',// ‘-’号表示支出‘+’号表示收入
-//   }
-// },
-// mounted() {
-//   console.log(this.xxx)
-// },
-// methods: {
-//   selectType(type) {
-//     if (type !== '-' && type !== '+') {
-//       throw new Error('type is unknown')
-//     }
-//     this.type = type
-//   }
-// }
-// }
 
 </script>
 
