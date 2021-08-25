@@ -49,16 +49,12 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    // eslint-disable-next-line no-undef
-    const record2: RecordItem = recordListModel.clone(this.record);
-    record2.createAt = new Date();
-    this.recordList.push(record2);
-    // console.log(this.recordList);
+    recordListModel.create(this.record);
   }
 
   @Watch('recordList')
   onRecordListChange() {
-    recordListModel.save(this.recordList);
+    recordListModel.save();
   }
 }
 </script>
@@ -68,7 +64,8 @@ export default class Money extends Vue {
   display: flex;
   flex-direction: column-reverse;
 }
-.notes{
+
+.notes {
   padding: 12px 0;
 }
 </style>
