@@ -7,8 +7,9 @@
                 placeholder="在这里输入备注"
                 @update:value="onUpdateNotes"/>
     </div>
-
     <Tags/>
+    {{ count }}
+    <button @click="add">+1</button>
   </Layout>
 </template>
 
@@ -19,15 +20,21 @@ import Types from '@/components/Money/Types.vue';
 import FormItem from '@/components/Money/FormItem.vue';
 import Tags from '@/components/Money/Tags.vue';
 import {Component} from 'vue-property-decorator';
-import store from '@/store/index2';
+import oldStore from '@/store/index2';
+import store from '@/store/index';
 
 
 @Component({
-  components: {Tags, FormItem, Types, NumberPad}
+  components: {Tags, FormItem, Types, NumberPad},
+  computed: {
+    count() {
+      return store.state.count;
+    }
+  }
 })
 export default class Money extends Vue {
   // eslint-disable-next-line no-undef
-  recordList= store.recordList;
+  recordList = oldStore.recordList;
   // eslint-disable-next-line no-undef
   record: RecordItem = {
     tags: [],
@@ -41,13 +48,13 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    store.createRecord(this.record);
+    oldStore.createRecord(this.record);
   }
 
-  // @Watch('recordList')
-  // onRecordListChange() {
-  //   recordListModel.save();
-  // }
+  add(){
+    store.commit('increment',1)
+  }
+
 }
 </script>
 
