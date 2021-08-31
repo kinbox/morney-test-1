@@ -18,6 +18,8 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Button from '@/components/Button.vue';
+import {mixins} from 'vue-class-component';
+import {TagHelper} from '@/mixins/TagHelper';
 
 @Component({
   components: {Button},
@@ -27,16 +29,11 @@ import Button from '@/components/Button.vue';
     }
   }
 })
-export default class labels extends Vue {
-  beforeCreated() {
+export default class labels extends mixins(TagHelper) {
+  beforeCreate() {
     this.$store.commit('fetchTags');
   }
 
-  createTag() {
-    const name = window.prompt('请输入标签名');
-    if (!name) {return window.alert('标签不能为空');}
-    this.$store.commit('createTag', name);
-  }
 }
 
 </script>
