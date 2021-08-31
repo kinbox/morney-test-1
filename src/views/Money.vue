@@ -9,7 +9,7 @@
     </div>
     <Tags/>
     {{ count }}
-    <button @click="add">+1</button>
+    <button @click="$store.commit('increment',1)">+1</button>
   </Layout>
 </template>
 
@@ -21,14 +21,12 @@ import FormItem from '@/components/Money/FormItem.vue';
 import Tags from '@/components/Money/Tags.vue';
 import {Component} from 'vue-property-decorator';
 import oldStore from '@/store/index2';
-import store from '@/store/index';
-
 
 @Component({
   components: {Tags, FormItem, Types, NumberPad},
   computed: {
     count() {
-      return store.state.count;
+      return this.$store.state.count;
     }
   }
 })
@@ -51,9 +49,6 @@ export default class Money extends Vue {
     oldStore.createRecord(this.record);
   }
 
-  add(){
-    store.commit('increment',1)
-  }
 
 }
 </script>

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-Vue.use(Vuex);
+Vue.use(Vuex);//把 store 绑定到 Vue.prototype上
 
 const store = new Vuex.Store({
   state: {
