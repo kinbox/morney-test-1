@@ -21,13 +21,12 @@ import {Component} from 'vue-property-decorator';
 
 @Component({
   components: {Tags, FormItem, Types, NumberPad},
-  computed: {
-    count() {
-      return this.$store.state.recordList;
-    }
-  }
+
 })
 export default class Money extends Vue {
+  get recordList() {
+    return this.$store.state.recordList;
+  }
   // eslint-disable-next-line no-undef
   record: RecordItem = {
     tags: [],

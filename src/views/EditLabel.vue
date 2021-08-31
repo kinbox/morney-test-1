@@ -24,19 +24,16 @@ import Button from '@/components/Button.vue';
 
 @Component({
   components: {Button, FormItem},
-  computed:{
-    tag(){
-      return this.$store.state.currentTag
-    }
-  }
 })
 export default class EditLabel extends Vue {
-  // eslint-disable-next-line no-undef
-  tag?: Tag = undefined;
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  get tag() {
+    return this.$store.state.currentTag;
+  }
 
   created() {
-    const id=this.$route.params.id;
-    this.$store.commit('setCurrentTag',id)
+    const id = this.$route.params.id;
+    this.$store.commit('setCurrentTag', id);
     if (!this.tag) {
       this.$router.replace('/404');
     }
