@@ -35,7 +35,7 @@ export default class Money extends Vue {
     tags: [],
     notes: '',
     type: '-',
-    amount: 10
+    amount: 0
   };
   created(){
     this.$store.commit('fetchRecords')
@@ -45,7 +45,7 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    this.$store.commit('saveRecords', this.record);
+    this.$store.commit('createRecord', this.record);
   }
 
 

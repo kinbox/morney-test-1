@@ -38,7 +38,7 @@ const store = new Vuex.Store({
       },
       removeTag(state, id: string) {
         let index = -1;
-        for (let i = 0; i < this.tagList.length; i++) {
+        for (let i = 0; i < state.tagList.length; i++) {
           if (state.tagList[i].id === id) {
             index = i;
             break;
@@ -66,8 +66,7 @@ const store = new Vuex.Store({
           JSON.stringify(state.recordList));
       },
       fetchTags(state) {
-        return state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
-
+        state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
       },
       createTag(state, name: string) {
         const names = state.tagList.map(item => item.name);
