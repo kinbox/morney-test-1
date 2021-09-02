@@ -1,16 +1,23 @@
-//d.ts 自定义全局类型
 type RecordItem = {
   tags: string[]
   notes: string
   type: string
   amount: number
-  createAt?: Date
+  createAt?: string
+
 }
 
 type Tag = {
   id: string;
   name: string;
 }
+
+type RootState = {
+  recordList: RecordItem[],
+  tagList: Tag[],
+  currentTag?: Tag
+}
+
 type TagListModel = {
   data: Tag[]
   fetch: () => Tag[]
@@ -31,3 +38,5 @@ interface Window {
     createRecord:(record:RecordItem)=>void
   }
 }
+
+//d.ts 自定义全局类型
