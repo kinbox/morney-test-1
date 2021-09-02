@@ -36,16 +36,19 @@ export default class Statistics extends Vue {
   }
 
   beautify(string: string) {
-    const now = new Date();
-    if (dayjs(string).isSame(now, 'day')) {
+    const now = dayjs();
+    const day = dayjs(string);
+    if (day.isSame(now, 'day')) {
       return '今天';
-    } else if(dayjs(string).isSame(now.valueOf() - 86400 * 1000, 'day'))
-    {
+    } else if (day.isSame(now.subtract(1, 'day'),'day')) {
       return '昨天';
+    } else if(day.isSame(now.subtract(2, 'day'),'day')) {
+      return '前天';
+    } else if(day.isSame(now,'year')) {
+      return day.format('M月DD日');
+    }else{
+      return day.format('YYYY年M月D日');
     }
-
-  else
-    {return string;}
   }
 
   get recordList() {
