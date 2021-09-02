@@ -3,12 +3,12 @@
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
     <ol>
-      <li v-for="(group,index) in result" :key="index">
-        <h3 class="title">{{ group.title }}</h3>
+      <li v-for="group in result" :key="group.title">
+        <h3 class="title">{{ beautify(group.title) }}</h3>
         <ol>
           <li class="record" v-for="item in group.items" :key="item.id">
             <span>{{ tagString(item.tags) }}</span>
-            <span class="notes">{{item.notes}}</span>
+            <span class="notes">{{ item.notes }}</span>
             <span>￥{{ item.amount }}</span>
           </li>
         </ol>
@@ -17,28 +17,6 @@
   </Layout>
 </template>
 
-<style scoped lang="scss">
-%item{
-  padding: 8px 16px;
-  line-height: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-}
-.title{
-  @extend %item
-}
-.record{
-  background: white;
-  @extend %item
-}
-.notes{
-  margin-left: 8px;
-  margin-right: auto;
-  color: #c4c4c4;
-}
-</style>
-
 <script lang="ts">
 
 import Vue from 'vue';
@@ -46,16 +24,30 @@ import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
 import intervalList from '@/constant/intervalList';
 import recordTypeList from '@/constant/recordTypeList';
-
+import dayjs from 'dayjs';
 
 @Component({
   components: {Tabs},
 })
 export default class Statistics extends Vue {
   // eslint-disable-next-line no-undef
-  tagString(tags:Tag[]){
-    return tags.length===0?'无' :tags.join(',')
+  tagString(tags: Tag[]) {
+    return tags.length === 0 ? '无' : tags.join(',');
   }
+
+  beautify(string: string) {
+    const now = new Date();
+    if (dayjs(string).isSame(now, 'day')) {
+      return '今天';
+    } else if(dayjs(string).isSame(now.valueOf() - 86400 * 1000, 'day'))
+    {
+      return '昨天';
+    }
+
+  else
+    {return string;}
+  }
+
   get recordList() {
     // eslint-disable-next-line no-undef
     return (this.$store.state as RootState).recordList;
@@ -88,6 +80,29 @@ export default class Statistics extends Vue {
 </script>
 
 <style scoped lang="scss">
+%item {
+  padding: 8px 16px;
+  line-height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.title {
+  @extend %item
+}
+
+.record {
+  background: white;
+  @extend %item
+}
+
+.notes {
+  margin-left: 8px;
+  margin-right: auto;
+  color: #c4c4c4;
+}
+
 ::v-deep .type-tabs-item {
   background: white;
 
