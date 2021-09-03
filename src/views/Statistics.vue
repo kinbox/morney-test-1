@@ -30,7 +30,6 @@ import dayjs from 'dayjs';
   components: {Tabs},
 })
 export default class Statistics extends Vue {
-  // eslint-disable-next-line no-undef
   tagString(tags: Tag[]) {
     return tags.length === 0 ? '无' : tags.join(',');
   }
@@ -59,7 +58,6 @@ export default class Statistics extends Vue {
   get result() {
 
     const {recordList} = this;
-    // eslint-disable-next-line no-undef
     type HashTableValue = { title: string, items: RecordItem[] }
 
     const hashTable: { [key: string]: HashTableValue } = {};

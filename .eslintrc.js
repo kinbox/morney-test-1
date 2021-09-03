@@ -30,7 +30,10 @@ module.exports = {
     }
   ],
   "globals":{
-    "__WebpackModuleApi":"writable"
-  }
+    "__WebpackModuleApi":"writable",
+    RecordItem:true,
+    Tag:true,
+  },
+
 //  使用global让数据全局可以改变
 }
