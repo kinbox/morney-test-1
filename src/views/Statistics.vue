@@ -25,6 +25,7 @@ import Tabs from '@/components/Tabs.vue';
 import intervalList from '@/constant/intervalList';
 import recordTypeList from '@/constant/recordTypeList';
 import dayjs from 'dayjs';
+import clone from '@/lib/clone';
 
 @Component({
   components: {Tabs},
@@ -60,13 +61,10 @@ export default class Statistics extends Vue {
     const {recordList} = this;
     type HashTableValue = { title: string, items: RecordItem[] }
 
-    const hashTable: { [key: string]: HashTableValue } = {};
-    for (let i = 0; i < recordList.length; i++) {
-      const [date, time] = recordList[i].createAt!.split('T');
-      hashTable[date] = hashTable[date] || {title: date, items: []};
-      hashTable[date].items.push(recordList[i]);
-    }
-    return hashTable;
+    // const hashTable: { title: string, item: RecordItem[] }[];
+    const newList=clone(recordList).sort((a,b)=>dayjs(a.createAt).valueOf()-dayjs(b.createAt).valueOf())
+    console.log(newList.map(i=>i.createAt));
+    return []
   }
 
   beforeCreate() {
