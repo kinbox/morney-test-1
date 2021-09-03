@@ -3,7 +3,7 @@
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
     <ol>
-      <li v-for="group in result" :key="group.title">
+      <li v-for="(group,index) in groupedList" :key="index">
         <h3 class="title">{{ beautify(group.title) }}</h3>
         <ol>
           <li class="record" v-for="item in group.items" :key="item.id">
@@ -40,13 +40,13 @@ export default class Statistics extends Vue {
     const day = dayjs(string);
     if (day.isSame(now, 'day')) {
       return '今天';
-    } else if (day.isSame(now.subtract(1, 'day'),'day')) {
+    } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
       return '昨天';
-    } else if(day.isSame(now.subtract(2, 'day'),'day')) {
+    } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
       return '前天';
-    } else if(day.isSame(now,'year')) {
+    } else if (day.isSame(now, 'year')) {
       return day.format('M月DD日');
-    }else{
+    } else {
       return day.format('YYYY年M月D日');
     }
   }
@@ -56,15 +56,26 @@ export default class Statistics extends Vue {
     return (this.$store.state as RootState).recordList;
   }
 
-  get result() {
+  get groupedList() {
 
     const {recordList} = this;
-    type HashTableValue = { title: string, items: RecordItem[] }
+    if (recordList.length === 0) {return [];}
 
     // const hashTable: { title: string, item: RecordItem[] }[];
-    const newList=clone(recordList).sort((a,b)=>dayjs(a.createAt).valueOf()-dayjs(b.createAt).valueOf())
-    console.log(newList.map(i=>i.createAt));
-    return []
+    const newList = clone(recordList).sort((a, b) => dayjs(a.createAt).valueOf() - dayjs(b.createAt).valueOf());
+    // console.log(newList.map(i=>i.createAt));
+    const result = [{title: dayjs(recordList[0].createAt).format('YYYY-MM-DD'), items: [recordList[0]]}];
+    for (let i = 1; i < newList.length; i++) {
+      const current = newList[i];
+      const last = result[result.length - 1];
+      if (dayjs(last.title).isSame(dayjs(current.createAt),'day')){
+        last.items.push(current)
+      }else{
+        result.push({title: dayjs(current.createAt).format('YYYY-MM-DD'),items:[current]})
+      }
+    }
+    console.log(result);
+    return result;
   }
 
   beforeCreate() {
