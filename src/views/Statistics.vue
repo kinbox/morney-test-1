@@ -89,7 +89,6 @@ export default class Statistics extends Vue {
   }
 
   type = '-';
-
   recordTypeList = recordTypeList;
 }
 </script>
