@@ -3,6 +3,9 @@ const path = require('path')
 // import path from  'path';
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/kinbox-morney-test-1-website/'
+    : '/',
   lintOnSave: false,
   chainWebpack: config => {
     const dir = path.resolve(__dirname, 'src/assets/icons')
